@@ -11,25 +11,9 @@ function HttpGet($url, $file = null)
     curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
-    if (!empty($file)) {
-
-        curl_setopt($ch, CURLOPT_FILE, $file);
-    }
-
     $result = curl_exec($ch);
 
     curl_close($ch);
 
-    if (!empty($file)) {
-        fclose($file);
-    }
-
     return $result;
-}
-
-function DownloadImg($url, $folder)
-{
-    $filename = basename($url);
-    $image = fopen($folder . '/' . $filename, 'a+');
-    return HttpGet($url, $image);
 }
